@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap');
+
+:root {
+  --base-cl: #814c56;
+  --white-cl: #ddd;
+  --light-cl: #b36978;
+  --lighter-cl: #ad8089;
+  /* --lighter-cl: #e9d6da; */
+  
+  --text-cl: #777;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kumbh Sans', san-serif ;
+}
+
+
+.header {
+  height: 100vh;
+  background-image: url('/images/main.png');
+  background-position: center;
+  background-size: cover ;
+}
+  
+
+.container {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.container h1 {
+  margin: 20px 0 0 0;
+
+}
+
+.logo {
+  position: sticky;
+  font-size: 25px;
+  margin: 30px 0 0 -30px;
+  width: 5%;
+  color: var(--light-cl);
+  text-decoration: none;
+}
+
+
+
+.header-text {
+  max-width: 350px;
+  margin: 10rem 0 0 -40px;
+}
+
+.header-text h1 {
+  font-size: 34px;
+  color: var(--base-cl);
+
+}
+
+
+
+.span {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: var(--lighter-cl);
+  display: inline-block;
+  margin: 15px 0 15px -2px;
+
+}
+
+.header-text  a {
+  text-decoration: none;
+  background: transparent;
+  padding: 10px 30px;
+  border: none;
+  color: var(--light-cl);
+  outline: none;
+  border: 1px solid var(--light-cl);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.header-text p {
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--text-cl);
+  margin-bottom: 40px;
+
+}
+
+/* Side bar */
+.show-bar {
+  width: 0;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: var(--lighter-cl);
+  opacity: 0.9;
+  z-index: 2;
+  transition: .5s;
+}
+
+.hide-bar {
+  width: 120px;
+  height: 100vh;
+  opacity: 0.9;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: var(--lighter-cl);
+  z-index: 2;
+  transition: .5s;
+}
+
+
+nav ul li {
+  list-style: none;
+  margin: 50px 20px;
+}
+
+a.link {
+  text-decoration: none;
+  color: var(--white-cl);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+.toggle {
+  position: fixed;
+  color: var(--white-cl) !important;
+  z-index: 2;
+  right: 20px;
+  top: 50px;
+  font-size: large !important;
+  cursor: pointer;
+  font-size: large;
+}
+
+
+/* about */
+.about {
+
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  /* flex-wrap: wrap; */
+}
+
+.about-left {
+  flex-basis: 50%;
+}
+
+.about-left img {
+  width: 100%;
+  margin-top: 150px;
+}
+
+.about-right {
+  flex-basis: 50%;
+  text-align: right;
+}
+
+
+
+.about-text {
+  max-width: 500px;
+  margin: 0 80px 0 0;
+  display: inline-block;
+  color: var(--text-cl);
+
+}
+
+.about-text h1 {
+  color: var(--base-cl);
+  font-size: 30px;
+  margin: 20px 0 ;
+}
+
+
+/* contact */
+
+.contact {
+  margin-top: -5px;
+}
+
+.contact-row{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contact-left, .contact-right {
+  flex-basis: 50%;
+}
+
+.contact-right img {
+  width: 50%;
+  margin-left: 120px;
+  transition: .5s;
+}
+
+/* contact form */
+form {
+  margin: 0 auto 20px;
+  box-sizing: border-box;
+}
+
+form h1 {
+  margin-left: 200px;
+  margin-bottom: 20px;
+  color: var(--base-cl);
+  width: 100%;
+  font-size: 30px;
+}
+
+form small {
+  color: red;
+  display: block;
+
+  margin-left: 120px;
+}
+form .input {
+  display: block;
+  font-size: 16px;
+  margin: 0 10px 10px 120px ;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid var(--text-cl);
+  border-radius: 3px;
+  color: var(--text-cl);
+  caret-color: var(--text-cl);
+  box-sizing: border-box;
+  
+}
+
+form .btn-submit {
+  margin: 0 10px 10px 120px ;
+  width: 50%;
+  border: 3px;
+  padding: 15px;
+  background: var(--light-cl);
+  color: var(--white-cl);
+  opacity: 0.7;
+  border-radius: 3px;
+  transition: .3s;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+form .btn-submit:hover {
+  opacity: 0.8;
+  transition: .3s;
+}
+
+
+
+
+
+
+
+
+
+/*  Media query */
+@media only screen and (max-width: 770px) { 
+  .header {
+    background-image: none;
+  }
+    
+  .container {
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+
+  .container h1 {
+    margin: 20px 0 0 0;
+  }
+
+  .logo {
+    font-size: 18px;
+    margin: 30px 0 0 -30px;
+    width: 5%;
+    color: var(--light-cl);
+    text-decoration: none;
+  }
+
+
+
+  .header-text {
+    margin: 10rem 0 0 -40px;
+  }
+
+  .header-text h1 {
+    font-size: 34px;
+    color: var(--base-cl);
+  }
+  .about-left img {
+    display: none;
+  }
+  .about-text {
+    text-align: center;
+
+  }
+
+  .about-text p {
+    text-align: center;
+  }
+  
+}
