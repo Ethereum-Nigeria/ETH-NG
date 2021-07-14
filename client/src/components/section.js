@@ -1,11 +1,17 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 import Logo from "./logo"
 import About from '../pages/about'
 import Contact from "../pages/contact"
+import { AuthContext } from "../contexts/auth-context"
 
 
 const Section = () => {
+  const { userState } = useContext(AuthContext)
+  const { isAuthenticated, name } = userState 
+
+
 
   return (
     <>
@@ -14,6 +20,7 @@ const Section = () => {
           <Logo />
 
           <div className='header-text'>
+            { isAuthenticated ? <h3>{ `Welcome ${name}`}</h3>: null}
             <h1>Bridging the gap to building on Ethereum and web3 accessiblity</h1>
 
             <span className='span'></span>

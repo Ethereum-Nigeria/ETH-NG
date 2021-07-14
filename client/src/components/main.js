@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './navbar'
 import About from '../pages/about'
 import Contact from '../pages/contact'
-import SignUp from '../pages/signup'
+import SignUp from '../pages/sign-up'
 
 
 import Section from './section'

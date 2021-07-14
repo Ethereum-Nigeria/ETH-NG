@@ -13,8 +13,8 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.use('/', require('./routes/'))
 app.use('/contact', require('./routes/contact'))
+app.use('/user', require('./routes/user'))
 
 connectDB()
 

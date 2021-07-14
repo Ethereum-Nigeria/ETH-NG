@@ -58,6 +58,14 @@
 
 }
 
+.header-text h3 {
+  /* font-size: 34px; */
+  color: var(--base-cl);
+  margin-bottom: 20px;
+
+}
+
+
 
 
 .span {
