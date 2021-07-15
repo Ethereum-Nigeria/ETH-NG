@@ -3,22 +3,15 @@ const router = require('express').Router()
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const { createJWT } = require('../utils/jwt-utils')
+const { authMiddleware } = require('../middlewares/auth-middleware')
+const { fetchAllUsersMiddleWare } = require('../middlewares/fetchUserMiddleware')
 
 
-// @route - GET /user/register
+// @route - GET /user/register/all
 // @desc - fetch existing users' data
-// @access - private (WIP)
-router.get('/', async (req, res) => {
-    try {
-
-        const foundUser = await User.find({}).select('-password -updatedAt')
-        .lean()
-        if(foundUser) return res.json(foundUser)
-        throw Error('user record not found')
-        
-    } catch(err) {
-        return res.json(err)
-    }    
+// @access - private
+router.get('/register/all', authMiddleware, fetchAllUsersMiddleWare,  (req, res) => {
+       
 })
 
 // @route - POST /user/register
@@ -84,9 +77,9 @@ router.post('/register', [
                     const savedUser = await newUser.save()
                     const genToken = createJWT(savedUser._id)
                     if(genToken) {
-                        res.cookie('jwtToken', genToken, { httpOnly: true, maxAge: process.env.MAX_AGE * 1000}).json({
+                        res.cookie('jwtToken', genToken, { httpOnly: true }).json({
                             name: savedUser.name,
-                            email: savedUser.email
+                            email: savedUser.email,
                         })
                     }
                 } catch (err) {
@@ -98,5 +91,7 @@ router.post('/register', [
         
     }
 })
+
+
 
 module.exports = router

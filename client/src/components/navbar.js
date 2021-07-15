@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../contexts/auth-context'
 import { ToggleContext } from '../contexts/toggle-context'
 
 import Hamburger from './hamburger'
@@ -7,7 +8,10 @@ import Hamburger from './hamburger'
 
 const Navbar = () => {
   const { toggleNav, isNavToggle } = useContext(ToggleContext)
+  const { userState } = useContext(AuthContext)
 
+  console.log(userState)
+  
 
   return (
     <>

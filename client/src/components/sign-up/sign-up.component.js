@@ -18,7 +18,7 @@ const initialFormState = {
 }
 
 const SignUp = () => {
-  const { addData, userState, enableAuth } = useContext(AuthContext)
+  const { addData, enableAuth } = useContext(AuthContext)
   const [ formEntry, setFormEntry ] = useState(initialFormState)
 
   const { name, email, password, confirmPassword } = formEntry 
@@ -50,10 +50,10 @@ const SignUp = () => {
         setFormEntry(initialFormState) 
         enableAuth({
           name,
-          email
-
+          email,
+          isAuthenticated: true
         })
-        history.push('/')
+        history.push('/user/dashboard')
       }
     } catch(err) {
       console.error(err)

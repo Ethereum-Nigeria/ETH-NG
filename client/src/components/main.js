@@ -4,6 +4,8 @@ import Navbar from './navbar'
 import About from '../pages/about'
 import Contact from '../pages/contact'
 import SignUp from '../pages/sign-up'
+import UserDetailPage from '../pages/user-detail.page'
+
 
 
 import Section from './section'
@@ -18,6 +20,7 @@ const Main = () => {
           <Route path='/about'  component={ About } />
           <Route path='/contact' component={ Contact } />
           <Route path='/signup'  component={ SignUp } />
+          <Route path='/user/dashboard'  component={ UserDetailPage } />
 
         </Switch>
       </Router>
