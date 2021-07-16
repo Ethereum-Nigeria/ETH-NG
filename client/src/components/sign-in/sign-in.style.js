@@ -22,10 +22,8 @@ const FormContainer = styled.div`
     &.warning {
       color: orange;
       font-size: 18px;
-      &:hover{
-        color: red;
-        opacity: unset;
-      }
+      margin-left: 2px;
+      
     }
     color: #bdbdbd;
     font-size: 18px;
@@ -109,7 +107,7 @@ const Alternative = styled.div`
 
   a {
       color: #ad8089;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
       font-weight: 600;
       text-decoration: none;

@@ -5,26 +5,24 @@ import axios from 'axios'
 import Input from './input'
 import Button from './button'
 import { AuthContext } from '../../contexts/auth-context'
-import { FormContainer, Alternative } from './sign-up.style'
+import { FormContainer, Alternative } from './sign-in.style'
 
 
 axios.defaults.withCredentials = true
 
 
 const initialFormState = {
-  name: '',
   email: '',
   password: '',
-  confirmPassword: ''
 }
 
-const SignUp = () => {
-  
+const SignIn = () => {
   const { addData, enableAuth } = useContext(AuthContext)
   const [ formEntry, setFormEntry ] = useState(initialFormState)
+  const [ requestError, setRequestError ] = useState(null)
 
-  const { name, email, password, confirmPassword } = formEntry 
-  
+  const { email, password } = formEntry 
+
   const handleChange = e => {
     const { value, name } = e.target
     setFormEntry(formEntry => ({...formEntry, [name]: value}))
@@ -38,14 +36,21 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     addData(formEntry)
-    const endPoint = '/user/register'
+    const endPoint = '/user/auth'
     try {
-      const { data: { validationErrors, name, email } } = await axios.post(endPoint, formEntry)
+      const result = await axios.post(endPoint, formEntry)
+
+      console.log(result)
+      const { data: { validationErrors, name, email, msg } } = result
+      console.log(msg)
+      console.log(requestError)
        console.log(validationErrors)
 
       setFormErrors(validationErrors)
+      setRequestError(msg)
+      console.log(requestError)
       
-      if(!validationErrors) {
+      if(!validationErrors  && !msg) {
         setFormEntry(initialFormState) 
         enableAuth({
           name,
@@ -55,16 +60,18 @@ const SignUp = () => {
         history.push('/user/dashboard')
       }
     } catch(err) {
-      console.error(err)
+        // console.log(err.message)
+        
+      return setRequestError(`Invalid login credentials: ${err.message}`)
+      
     }
   }
-  
   return (
     <> 
       <FormContainer>
         <form onSubmit={ handleSubmit }> 
 
-        <h1>Sign up here</h1>
+        <h1>Sign In</h1>
         
           { formErrors && formErrors.length === 4 ? <small className='warning'> All fields are required</small>  : (
             
@@ -72,32 +79,29 @@ const SignUp = () => {
               {formErrors && formErrors.map((error, index) => {
             
                 const {msg, param} = error
-                if(param === 'name' || param === 'email' || param === 'password' || param === 'confirmPassword' ) {
+                if( param === 'email' || param === 'password'  ) {
                   return <small key={index} className='warning' > { msg }</small>
                 } return ''
               } )}
             </ul>
           )}
-          <Input type='text' placeholder='Enter Name'  name='name' onChange={ handleChange } value={name} autoFocus />
+          { requestError !== '' ? <small>{ requestError }</small> : null}
           <Input  type='text' placeholder='Enter Email' name='email'  onChange={ handleChange } value={email} />
           <Input  type='text' placeholder='Enter Password' name='password'  onChange={ handleChange } value={password} />
-          <Input  type='text' placeholder='Confirm Password' name='confirmPassword'  onChange={ handleChange } value={confirmPassword} />
           
-          <Button  value='Sign Up' />
+          <Button  value='Sign In' />
 
 
         </form>
-       
         <Alternative>
-          <p>Have an account already?</p> 
-          <Link to='/user/auth'>Sign In</Link>
+          <p>Don't have an account?</p> 
+          <Link to='/user/signup'>Sign Up</Link>
         </Alternative>
-        
       </FormContainer>
-     
+      
        
     </>
   )
 }
 
-export default SignUp
+export default SignIn

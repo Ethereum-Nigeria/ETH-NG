@@ -29,7 +29,7 @@ router.post('/register', [
    check('email')
    .custom(async (value) => {
     try {
-        const foundUser  = await User.findOne({email: value})
+        const foundUser  = await User.findOne({email: value}).select('-password')
         if(foundUser) {
             throw Error('email already exists')
         } return
@@ -67,7 +67,7 @@ router.post('/register', [
     } else {
         const { name, password, email } = req.body
         const newUser = new User({
-            name, password, email
+            name, password, email: email.toLowerCase()
         })
          try {
             const salt = await bcrypt.genSalt(parseInt(process.env.GEN_SALT))
@@ -91,6 +91,68 @@ router.post('/register', [
         
     }
 })
+
+// @route - POST /user/auth
+// @desc - login user
+// @access - private
+router.post('/auth', [
+
+    check('email', 'enter valid email')
+    .isEmail()
+    .normalizeEmail(),
+
+    check('password', 'password cannot be blank')
+    .custom(value => {
+        if(!/\S/.test(value)) {
+            throw new Error('password cannot be blank')
+        } return true
+    })
+    .not().isEmpty()
+    .trim().escape()
+ 
+   ], async (req, res) => {
+       const validationErrors = validationResult(req)
+       if(!validationErrors.isEmpty()) {
+           res.json({
+               validationErrors: validationErrors.array()
+           })
+       } else {
+    
+          const { email, password } = req.body
+        
+          try{
+
+            const foundUser = await User.findOne({email})
+            // if(!foundUser) return res.status(404).json({ msg: 'invalid user record'})
+            const match = await bcrypt.compare(password, foundUser.password)
+            if(!match) {
+                return res.status(401).json({ msg: 'invalid password'})
+            } else {
+                try {
+                
+                    const genToken = createJWT(foundUser._id)
+                    return res.cookie('jwtToken', genToken).json({
+                        name: foundUser.name,
+                        email: foundUser.email,
+                        createdAt: foundUser.createdAt
+                    })
+                    
+                } catch(err) {
+                    return res.json(`invalid login credentials: ${err}`)
+                }
+            }  
+            
+          } catch(err) {
+            //   return res.json(err)
+              return res.json({ err, msg: 'invalid user record'})
+          }
+ 
+          
+
+       }
+    
+})
+
 
 
 

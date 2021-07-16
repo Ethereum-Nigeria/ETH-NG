@@ -13,7 +13,7 @@ const Container = styled.div`
    
 `
 
-const Signup = () => {
+const SignupPage = () => {
   return (
     <div>
       <Container>
@@ -24,4 +24,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignupPage

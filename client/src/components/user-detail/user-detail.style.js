@@ -61,8 +61,9 @@ const HeadContent = styled.li`
   border-radius: 10px 10px 0 0;
   justify-content: space-between;
   align-items: center;
-  background: #ad8089;
-  opacity: 1;
+  // background: #ad8089;
+  background: #555;
+  opacity: 0.3;
   height: 30%;
   width: 100%;
   margin-right: 0;
@@ -79,7 +80,7 @@ const HeadContent = styled.li`
 
   h2:nth-child(2) {
     color: #eee;
-    opacity: 0.5;
+    opacity: 0.8;
     font-weight: lighter;
     padding-right: 30px;
   }
