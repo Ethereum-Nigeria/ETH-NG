@@ -3,8 +3,12 @@ const router = require('express').Router()
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const { createJWT } = require('../utils/jwt-utils')
+const { google } = require('googleapis')
+const nodemailer = require('nodemailer')
 const { authMiddleware } = require('../middlewares/auth-middleware')
 const { fetchAllUsersMiddleWare } = require('../middlewares/fetchUserMiddleware')
+
+
 
 
 // @route - GET /user/register/all
@@ -13,6 +17,7 @@ const { fetchAllUsersMiddleWare } = require('../middlewares/fetchUserMiddleware'
 router.get('/register/all', authMiddleware, fetchAllUsersMiddleWare,  (req, res) => {
        
 })
+
 
 // @route - POST /user/register
 // @desc - register new user
@@ -52,7 +57,7 @@ router.post('/register', [
 
    check('confirmPassword')
    .custom((value, { req }) => {
-    if(value !== req.body.password) {
+    if(value !== req.body.confirmPassword) {
         throw new Error('both passwords must match')
     } return true
   })
@@ -119,9 +124,7 @@ router.post('/auth', [
        } else {
     
           const { email, password } = req.body
-        
           try{
-
             const foundUser = await User.findOne({email})
             // if(!foundUser) return res.status(404).json({ msg: 'invalid user record'})
             const match = await bcrypt.compare(password, foundUser.password)
@@ -129,7 +132,6 @@ router.post('/auth', [
                 return res.status(401).json({ msg: 'invalid password'})
             } else {
                 try {
-                
                     const genToken = createJWT(foundUser._id)
                     return res.cookie('jwtToken', genToken).json({
                         name: foundUser.name,
@@ -146,12 +148,11 @@ router.post('/auth', [
             //   return res.json(err)
               return res.json({ err, msg: 'invalid user record'})
           }
- 
-          
-
        }
     
 })
+
+
 
 
 

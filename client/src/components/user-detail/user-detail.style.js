@@ -143,13 +143,13 @@ const ContentBody = styled.li`
       background: #ad8089;
       padding: 15px;
       transition: 0.3s;
-      opacity: 0.9;
+      opacity: 0.8;
       cursor: pointer;
       display: flex;
       flex-direction: column;
 
       &:hover {
-        opacity: 1;
+        opacity: 0.9;
       transition: 0.3s;
 
       }

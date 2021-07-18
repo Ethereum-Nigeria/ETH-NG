@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const { check, validationResult }  = require('express-validator')
 const Contact = require('../models/contact-model')
+const { sendMail } = require('../utils/send-email')
+
+
 
 
 // @route - GET /contact 
@@ -63,12 +66,20 @@ router.post('/', [
           })
           try {
             const savedContact = await newContact.save()
-            res.json({
-              success: true,
-              savedContact
-            })
+ 
+            try {
+              const emailResult =  await sendMail(savedContact.email, savedContact.name)
+              if(emailResult) {
+              return res.json({ success: true, savedContact, msg: 'Contact message sent, email sent to respondent'})
+              }            
+            } catch(err) {
+              throw err 
+            }
+
+            
+            
           } catch(err) {
-            res.json(err)
+            res.json(err)   
         }
       }
   

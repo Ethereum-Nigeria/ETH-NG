@@ -39,19 +39,19 @@ const Form = () => {
 
     try {
       const { data: responseData }= await axios.post(endPoint, formEntry)
+      const { validationError } = responseData
+      console.log(validationError)
+
       const { errors } = responseData
       setFormErrors(errors) 
-      if(!formErrors) {
-        setFormEntry({
-          name: '',
-          email: '',
-          message: '',
-        })
-        history.push('/about')
+      console.log(formErrors)
+      if(!validationError) {
+        setFormEntry(initialFormState)
+        history.push('/home')
       }
+      
     } catch (err) {
       setRequestError(err)
-      
     }
   }
   

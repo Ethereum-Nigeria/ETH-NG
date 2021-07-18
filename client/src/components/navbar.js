@@ -18,7 +18,7 @@ const Navbar = () => {
       <nav className={isNavToggle ? 'show-bar' : 'hide-bar'}> 
         <ul className='navlinks'> 
           
-          <li><NavLink to='/' className='link' >Home</NavLink> </li>
+          <li><NavLink to='/home' className='link' >Home</NavLink> </li>
           <li><NavLink to='/about' className='link' >About</NavLink> </li>
           <li><NavLink to='/contact' className='link' >Contact</NavLink> </li>
         </ul>

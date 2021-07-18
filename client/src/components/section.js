@@ -20,7 +20,6 @@ const Section = () => {
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam mollitia, error quod quae adipisci blanditiis sed itaque! Totam, earum, doloribus inventore molestias, porro quia distinctio voluptatem error quibusdam dicta quo? </p>
 
             <Link className='common-btn' to='/user/signup' >Get Started</Link>
-    
           </div>
         </div>
       </section>

@@ -17,7 +17,7 @@ const Main = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' exact component={ Section } />
+          <Route path='/home' exact component={ Section } />
           <Route path='/about'  component={ About } />
           <Route path='/contact' component={ Contact } />
           <Route exact path='/user/signup'  component={ SignUpPage } />

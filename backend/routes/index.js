@@ -18,14 +18,13 @@ router.get('/user', authMiddleware, async (req, res ) => {
     }
 })
 
+
 // @route - GET /api/user/logout
 // @desc - logout user
-
 router.get('/user/logout', (req, res) => {
     return res.cookie('jwtToken', '', { maxAge: -50 }).json({
         logout: true
-    })
-       
+    })    
 })
 
 module.exports = router
